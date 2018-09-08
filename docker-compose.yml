@@ -1,0 +1,47 @@
+version: "2"
+services:
+    mysql:
+      image: mysql:5.6
+      container_name: keys-db
+      volumes:
+        - ./mysql:/var/lib/mysql
+        - ./mysql-logs:/var/log/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=dev
+        - TZ='Europe/Paris'
+      ports:
+        - "3306:3306"
+    mailer:
+      image: mwader/postfix-relay:latest
+      container_name: keys-mailer
+      environment:
+        - POSTFIX_myhostname=small-keyring.com
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: keys-phpmyadmin
+      environment:
+        - PMA_HOST=keys-db
+      ports:
+        - "8080:80"
+    webserver:
+      image: nginx:alpine
+      container_name: keys-www
+      working_dir: /server
+      volumes:
+        - ./server:/server
+        - ./nginx/nginx-dev.conf:/etc/nginx/conf.d/default.conf
+        - ./nginx-logs:/var/log/nginx
+      ports:
+        - "80:80"
+    php-fpm:
+      build: php-fpm
+      container_name: keys-php
+      working_dir: /server
+      environment:
+        - GNUPGHOME=/home/keys/.gnupg
+      volumes:
+        - ./server:/server
+        #- ./php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+        - ./home:/home/keys
+
+
