@@ -23,6 +23,8 @@ cd commands
 # install dependencies
 ./composer install
 
+# wait for mysql up
+sleep 30
 
 # create database
 ./console sebk:small-orm:layers-execute
