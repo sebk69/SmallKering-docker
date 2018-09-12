@@ -26,6 +26,9 @@ $ cd SmallKering-docker
 $ ./install-dev.sh
 ```
 
+##### Access webapp
+Type in your favorite browser "http://localhost" and login
+
 #### Developpelent commands
 Some shortcut commands are present in "commands" folder of SmallKeyring-docker :
 
