@@ -2,6 +2,8 @@
 ### A docker environement for SmallKeyring
 
 #### Install developpement version
+Warning : This developement installation is not secure. Don't use it for production.
+
 ##### Precondition :
 The uid of your user must be 1000.
 
@@ -21,7 +23,7 @@ Logout and login again
 
 ##### Clone app and build docker environnement
 ``` bash
-$ git clone https://github.com/sebk69/SmallKering-docker.git
+$ git clone https://github.com/sebk69/SmallKeyring-docker.git
 $ cd SmallKering-docker
 $ ./install-dev.sh
 ```
